@@ -1,0 +1,131 @@
+{
+  "conversations": {
+    "Cliente 2::Matheus": [
+      {
+        "de": "Matheus",
+        "para": "Cliente 2",
+        "texto": "oooi",
+        "hora": "11:32",
+        "ts": 1772202769948
+      },
+      {
+        "de": "Cliente 2",
+        "para": "Matheus",
+        "texto": "Ooi",
+        "hora": "11:33",
+        "ts": 1772202781387
+      }
+    ],
+    "Cliente 3::Matheus": [
+      {
+        "de": "Matheus",
+        "para": "Cliente 3",
+        "texto": "aaaaaaaaaa",
+        "hora": "12:08",
+        "ts": 1772204935931
+      },
+      {
+        "de": "Matheus",
+        "para": "Cliente 3",
+        "texto": "aaa",
+        "hora": "12:08",
+        "ts": 1772204938402
+      },
+      {
+        "de": "Matheus",
+        "para": "Cliente 3",
+        "texto": "aaaaa",
+        "hora": "12:09",
+        "ts": 1772204940283
+      },
+      {
+        "de": "Matheus",
+        "para": "Cliente 3",
+        "texto": "aaaa",
+        "hora": "12:12",
+        "ts": 1772205140668
+      },
+      {
+        "de": "Matheus",
+        "para": "Cliente 3",
+        "texto": "a",
+        "hora": "12:12",
+        "ts": 1772205141133
+      },
+      {
+        "de": "Matheus",
+        "para": "Cliente 3",
+        "texto": "a",
+        "hora": "12:12",
+        "ts": 1772205141284
+      },
+      {
+        "de": "Matheus",
+        "para": "Cliente 3",
+        "texto": "a",
+        "hora": "12:12",
+        "ts": 1772205141724
+      },
+      {
+        "de": "Matheus",
+        "para": "Cliente 3",
+        "texto": "a",
+        "hora": "12:12",
+        "ts": 1772205142700
+      },
+      {
+        "de": "Matheus",
+        "para": "Cliente 3",
+        "texto": "a",
+        "hora": "12:12",
+        "ts": 1772205142868
+      },
+      {
+        "de": "Matheus",
+        "para": "Cliente 3",
+        "texto": "a",
+        "hora": "12:12",
+        "ts": 1772205143492
+      },
+      {
+        "de": "Matheus",
+        "para": "Cliente 3",
+        "texto": "oi",
+        "hora": "12:29",
+        "ts": 1772206148506
+      },
+      {
+        "de": "Cliente 3",
+        "para": "Matheus",
+        "texto": "oi",
+        "hora": "12:29",
+        "ts": 1772206160578
+      },
+      {
+        "de": "Cliente 3",
+        "para": "Matheus",
+        "texto": "oi",
+        "hora": "12:29",
+        "ts": 1772206169085
+      }
+    ]
+  },
+  "allUsers": [
+    {
+      "name": "Matheus",
+      "role": "advogado"
+    },
+    {
+      "name": "Cliente",
+      "role": "cliente"
+    },
+    {
+      "name": "Cliente 2",
+      "role": "cliente"
+    },
+    {
+      "name": "Cliente 3",
+      "role": "cliente"
+    }
+  ]
+}

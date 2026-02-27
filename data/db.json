@@ -133,6 +133,14 @@
     {
       "name": "Cliente 3",
       "role": "cliente"
+    },
+    {
+      "name": "Advogado 2",
+      "role": "advogado"
+    },
+    {
+      "name": "LUMA",
+      "role": "advogado"
     }
   ]
 }

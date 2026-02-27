@@ -778,6 +778,110 @@
     #btn-cancelar-apagar { background: var(--surface2); color: var(--text); }
     #btn-confirmar-apagar { background: #e95978; color: white; }
 
+    /* ========== IA SENDER (role ia) ========== */
+    #ia-sender {
+      display: none;
+      flex: 1;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 32px 20px;
+      overflow-y: auto;
+      background: var(--bg);
+    }
+
+    .ia-sender-form {
+      width: 100%;
+      max-width: 560px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .ia-sender-cabecalho {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-bottom: 4px;
+    }
+
+    .ia-sender-cabecalho svg { color: var(--primary); flex-shrink: 0; }
+
+    .ia-sender-titulo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .ia-sender-sub {
+      font-size: 13px;
+      color: var(--text2);
+      margin-top: 3px;
+      line-height: 1.4;
+    }
+
+    .ia-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .ia-field label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text2);
+    }
+
+    .ia-field input,
+    .ia-field textarea {
+      padding: 12px 14px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-size: 15px;
+      outline: none;
+      background: var(--surface);
+      color: var(--text);
+      font-family: inherit;
+      transition: border-color 0.2s, background 0.2s;
+      resize: vertical;
+    }
+    .ia-field input:focus,
+    .ia-field textarea:focus { border-color: var(--primary); }
+    .ia-field input::placeholder,
+    .ia-field textarea::placeholder { color: var(--text3); }
+
+    .ia-field textarea { min-height: 140px; }
+
+    #btn-enviar-resumo {
+      padding: 14px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    #btn-enviar-resumo:hover { background: var(--primary-hover); }
+    #btn-enviar-resumo:disabled { background: var(--border); cursor: default; }
+
+    .ia-feedback {
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.35);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: #22c55e;
+      text-align: center;
+      display: none;
+    }
+    .ia-feedback.visivel { display: block; }
+
     /* ========== MOBILE ========== */
     @media (max-width: 640px) {
       #main-body { flex-direction: column-reverse; }
@@ -829,6 +933,10 @@
       <button class="role-btn" id="btn-role-advogado" type="button">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
         Advogado
+      </button>
+      <button class="role-btn" id="btn-role-ia" type="button">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="1" y1="9" x2="4" y2="9"/></svg>
+        IA
       </button>
     </div>
 
@@ -995,6 +1103,47 @@
 
       </div>
     </div>
+
+    <!-- Painel IA (visível apenas para role 'ia') -->
+    <div id="ia-sender">
+      <div class="ia-sender-form">
+        <div class="ia-sender-cabecalho">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="4" width="16" height="16" rx="2"/>
+            <rect x="9" y="9" width="6" height="6"/>
+            <line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/>
+            <line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/>
+            <line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/>
+            <line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/>
+          </svg>
+          <div>
+            <div class="ia-sender-titulo">Enviar Resumo</div>
+            <div class="ia-sender-sub">O resumo será entregue a todos os advogados conectados.</div>
+          </div>
+        </div>
+
+        <div class="ia-field">
+          <label for="ia-input-titulo">Título</label>
+          <input id="ia-input-titulo" type="text" placeholder="Ex: Resumo da conversa com Cliente X..." maxlength="100">
+        </div>
+
+        <div class="ia-field">
+          <label for="ia-input-conteudo">Conteúdo</label>
+          <textarea id="ia-input-conteudo" placeholder="Descreva o resumo ou análise gerada pela IA..." maxlength="2000"></textarea>
+        </div>
+
+        <div class="ia-feedback" id="ia-feedback">Resumo enviado com sucesso!</div>
+
+        <button id="btn-enviar-resumo">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"/>
+            <polygon points="22 2 15 22 11 13 2 9 22 2" fill="currentColor" stroke="none"/>
+          </svg>
+          Enviar Resumo
+        </button>
+      </div>
+    </div>
+
   </div>
 
   <!-- Modal: confirmar apagar -->
@@ -1100,21 +1249,24 @@
     // ===== Seletor de perfil =====
     const btnRoleCliente  = document.getElementById('btn-role-cliente');
     const btnRoleAdvogado = document.getElementById('btn-role-advogado');
+    const btnRoleIA       = document.getElementById('btn-role-ia');
     const oabField        = document.getElementById('oab-field');
     const inputOAB        = document.getElementById('input-oab');
 
     function selecionarRole(role) {
       meuRole = role;
-      btnRoleCliente.classList.toggle('ativo', role === 'cliente');
+      btnRoleCliente.classList.toggle('ativo',  role === 'cliente');
       btnRoleAdvogado.classList.toggle('ativo', role === 'advogado');
+      btnRoleIA.classList.toggle('ativo',       role === 'ia');
       oabField.hidden = role !== 'advogado';
-      if (role === 'cliente') inputOAB.value = '';
+      if (role !== 'advogado') inputOAB.value = '';
     }
 
     selecionarRole('cliente');
 
     btnRoleCliente.addEventListener('click',  () => selecionarRole('cliente'));
     btnRoleAdvogado.addEventListener('click', () => selecionarRole('advogado'));
+    btnRoleIA.addEventListener('click',       () => selecionarRole('ia'));
 
     // ===== Login =====
     function entrar() {
@@ -1151,10 +1303,26 @@
       appEl.style.display = 'flex';
       preencherAvatar(meuAvatar, nome, 30);
       meuNomeEl.textContent = nome;
-      // Aba Clientes visível apenas para advogados
-      const navBtnClientes = document.querySelector('.nav-btn[data-tab="clientes"]');
-      if (navBtnClientes) navBtnClientes.style.display = role === 'advogado' ? '' : 'none';
-      socket.emit('listar_conversas');
+      // Aba Clientes/Advogados: oculta apenas para role 'ia'
+      const navBtnContatos = document.querySelector('.nav-btn[data-tab="clientes"]');
+      if (navBtnContatos) {
+        navBtnContatos.style.display = role === 'ia' ? 'none' : '';
+        navBtnContatos.querySelector('span').textContent = role === 'advogado' ? 'Clientes' : 'Advogados';
+      }
+      const tituloContatos = document.getElementById('clientes-titulo');
+      if (tituloContatos) tituloContatos.textContent = role === 'advogado' ? 'Clientes' : 'Advogados';
+
+      // Role IA: mostra painel de envio, esconde main-body
+      const mainBodyEl = document.getElementById('main-body');
+      const iaSenderEl = document.getElementById('ia-sender');
+      if (role === 'ia') {
+        mainBodyEl.style.display = 'none';
+        iaSenderEl.style.display = 'flex';
+      } else {
+        mainBodyEl.style.display = '';
+        iaSenderEl.style.display = 'none';
+        socket.emit('listar_conversas');
+      }
     });
 
     socket.on('entrar_erro', ({ motivo }) => {
@@ -1198,9 +1366,16 @@
       convListPanel.classList.remove('hide');
       chatArea.classList.remove('show');
       btnVoltarHeader.classList.remove('visivel');
-      // Restaura visibilidade do botão Clientes para o próximo login
-      const navBtnClientes = document.querySelector('.nav-btn[data-tab="clientes"]');
-      if (navBtnClientes) navBtnClientes.style.display = '';
+      // Restaura nav e visibilidade para o próximo login
+      const navBtnContatos = document.querySelector('.nav-btn[data-tab="clientes"]');
+      if (navBtnContatos) {
+        navBtnContatos.style.display = '';
+        navBtnContatos.querySelector('span').textContent = 'Clientes';
+      }
+      document.getElementById('main-body').style.display = '';
+      document.getElementById('ia-sender').style.display = 'none';
+      document.getElementById('ia-input-titulo').value = '';
+      document.getElementById('ia-input-conteudo').value = '';
       trocarTab('chat');
 
       setTimeout(() => socket.connect(), 150);
@@ -1486,6 +1661,56 @@
       if (activeChat === com) {
         mensagensDiv.innerHTML = '';
       }
+    });
+
+    // ===== Helpers =====
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    // ===== IA Sender =====
+    const iaInputTitulo   = document.getElementById('ia-input-titulo');
+    const iaInputConteudo = document.getElementById('ia-input-conteudo');
+    const btnEnviarResumo = document.getElementById('btn-enviar-resumo');
+    const iaFeedback      = document.getElementById('ia-feedback');
+
+    function enviarResumo() {
+      const titulo   = iaInputTitulo.value.trim();
+      const conteudo = iaInputConteudo.value.trim();
+      if (!titulo || !conteudo) return;
+      btnEnviarResumo.disabled = true;
+      socket.emit('enviar_resumo', { titulo, conteudo });
+    }
+
+    btnEnviarResumo.addEventListener('click', enviarResumo);
+
+    socket.on('resumo_enviado', () => {
+      iaInputTitulo.value   = '';
+      iaInputConteudo.value = '';
+      btnEnviarResumo.disabled = false;
+      iaFeedback.classList.add('visivel');
+      setTimeout(() => iaFeedback.classList.remove('visivel'), 3000);
+    });
+
+    // ===== IA Receiver (advogados) =====
+    socket.on('novo_resumo', (resumo) => {
+      const iaEmpty = document.getElementById('ia-empty');
+      const iaLista = document.getElementById('ia-lista');
+      if (iaEmpty) iaEmpty.style.display = 'none';
+
+      const card = document.createElement('div');
+      card.className = 'ia-card';
+      card.innerHTML = `
+        <div class="ia-card-header">
+          <span class="ia-card-titulo">${escapeHtml(resumo.titulo)}</span>
+          <span class="ia-card-hora">${escapeHtml(resumo.hora)}</span>
+        </div>
+        <div class="ia-card-corpo">${escapeHtml(resumo.conteudo)}</div>
+        <div class="ia-card-footer">Enviado por: ${escapeHtml(resumo.de)}</div>
+      `;
+      iaLista.insertBefore(card, iaLista.firstChild);
     });
 
     // ===== Reconexão =====

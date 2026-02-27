@@ -52,7 +52,7 @@ io.on('connection', (socket) => {
     nome = nome.trim().slice(0, 30);
     if (!nome) return;
 
-    if (role !== 'advogado' && role !== 'cliente') return;
+    if (role !== 'advogado' && role !== 'cliente' && role !== 'ia') return;
 
     if (role === 'advogado' && String(oab || '').trim() !== OAB_VALIDA) {
       socket.emit('entrar_erro', { motivo: 'OAB inválida. Verifique o número e tente novamente.' });
@@ -128,6 +128,32 @@ io.on('connection', (socket) => {
     }
     lista.sort((a, b) => b.ts - a.ts);
     socket.emit('lista_conversas', lista);
+  });
+
+  socket.on('enviar_resumo', ({ titulo, conteudo } = {}) => {
+    const de = online[socket.id];
+    if (!de || !titulo || !conteudo) return;
+    titulo  = String(titulo).trim().slice(0, 100);
+    conteudo = String(conteudo).trim().slice(0, 2000);
+    if (!titulo || !conteudo) return;
+
+    const resumo = {
+      de,
+      titulo,
+      conteudo,
+      hora: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+      ts: Date.now()
+    };
+
+    const db = loadDB();
+    db.allUsers
+      .filter(u => u.role === 'advogado')
+      .forEach(u => {
+        const sid = nameToSocket[u.name];
+        if (sid) io.to(sid).emit('novo_resumo', resumo);
+      });
+
+    socket.emit('resumo_enviado');
   });
 
   socket.on('carregar_historico', (outroNome) => {

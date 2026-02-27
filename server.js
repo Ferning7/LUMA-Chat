@@ -111,6 +111,25 @@ io.on('connection', (socket) => {
     }
   });
 
+  socket.on('listar_conversas', () => {
+    const eu = online[socket.id];
+    if (!eu) return;
+    const db = loadDB();
+    const lista = [];
+    for (const [key, msgs] of Object.entries(db.conversations)) {
+      if (!msgs || msgs.length === 0) continue;
+      const parts = key.split('::');
+      if (parts.length !== 2) continue;
+      const [a, b] = parts;
+      if (a !== eu && b !== eu) continue;
+      const outro = a === eu ? b : a;
+      const ultima = msgs[msgs.length - 1];
+      lista.push({ com: outro, ultimaMensagem: ultima.texto, hora: ultima.hora, ts: ultima.ts });
+    }
+    lista.sort((a, b) => b.ts - a.ts);
+    socket.emit('lista_conversas', lista);
+  });
+
   socket.on('carregar_historico', (outroNome) => {
     const eu = online[socket.id];
     if (!eu || !outroNome) return;

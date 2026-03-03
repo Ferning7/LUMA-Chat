@@ -14,6 +14,20 @@
         "texto": "Ooi",
         "hora": "11:33",
         "ts": 1772202781387
+      },
+      {
+        "de": "Cliente 2",
+        "para": "Matheus",
+        "texto": "Opa",
+        "hora": "10:56",
+        "ts": 1772546171381
+      },
+      {
+        "de": "Matheus",
+        "para": "Cliente 2",
+        "texto": "funciona",
+        "hora": "10:56",
+        "ts": 1772546214245
       }
     ],
     "Cliente 3::Matheus": [
@@ -162,7 +176,9 @@
     },
     {
       "name": "Cliente 2",
-      "role": "cliente"
+      "role": "cliente",
+      "passwordHash": "0fc3965983ad80d0a1ca595baf20c99d8d60da11ea93b919987655e0da5aea99",
+      "passwordSalt": "cfa76b0d0ae918357b1210ffbfdec94c"
     },
     {
       "name": "Cliente 3",
@@ -195,5 +211,14 @@
       "role": "advogado"
     }
   ],
-  "resumos": []
+  "resumos": [
+    {
+      "de": "LUMA",
+      "titulo": "TESTE",
+      "conteudo": "teste",
+      "hora": "10:52",
+      "data": "03/03/2026",
+      "ts": 1772545933013
+    }
+  ]
 }

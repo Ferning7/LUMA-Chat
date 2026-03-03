@@ -75,10 +75,10 @@ if (localStorage.getItem('luma-tema') === 'dark') {
 }
 
 function atualizarIconeTema() {
-  document.getElementById('btn-tema').innerHTML = isDark() ? SVG_SOL : SVG_LUA;
+  document.getElementById('botao-tema').innerHTML = isDark() ? SVG_SOL : SVG_LUA;
 }
 
-document.getElementById('btn-tema').addEventListener('click', () => {
+document.getElementById('botao-tema').addEventListener('click', () => {
   document.body.classList.toggle('dark');
   localStorage.setItem('luma-tema', isDark() ? 'dark' : 'light');
   atualizarIconeTema();
@@ -110,39 +110,39 @@ function preencherAvatar(el, nome, tamanho = 44) {
 }
 
 // ===== DOM =====
-const telaEntrada      = document.getElementById('tela-entrada');
-const appEl            = document.getElementById('app');
-const inputNome        = document.getElementById('input-nome');
-const btnEntrar        = document.getElementById('btn-entrar');
-const erroLogin        = document.getElementById('erro-login');
-const meuAvatar        = document.getElementById('meu-avatar');
-const meuNomeEl        = document.getElementById('meu-nome-header');
-const convListPanel    = document.getElementById('conv-list-panel');
+const telaEntrada      = document.getElementById('tela-login');
+const appEl            = document.getElementById('aplicativo');
+const inputNome        = document.getElementById('campo-nome');
+const btnEntrar        = document.getElementById('botao-entrar');
+const erroLogin        = document.getElementById('aviso-erro-login');
+const meuAvatar        = document.getElementById('avatar-usuario');
+const meuNomeEl        = document.getElementById('nome-usuario');
+const convListPanel    = document.getElementById('painel-lista-conversas');
 const listaConversas   = document.getElementById('lista-conversas');
-const chatArea         = document.getElementById('chat-area');
-const chatVazio        = document.getElementById('chat-vazio');
-const chatContent      = document.getElementById('chat-content');
-const parceiroAvatar   = document.getElementById('parceiro-avatar');
-const parceiroNome     = document.getElementById('parceiro-nome');
-const parceiroStatus   = document.getElementById('parceiro-status');
-const mensagensDiv     = document.getElementById('mensagens');
-const inputMensagem    = document.getElementById('input-mensagem');
-const btnEnviar        = document.getElementById('btn-enviar');
-const btnSair          = document.getElementById('btn-sair');
-const btnVoltarHeader  = document.getElementById('btn-voltar-header');
-const btnApagar        = document.getElementById('btn-apagar');
-const modalApagar      = document.getElementById('modal-apagar');
-const modalOverlay     = document.getElementById('modal-overlay');
-const btnCancelarApagar  = document.getElementById('btn-cancelar-apagar');
-const btnConfirmarApagar = document.getElementById('btn-confirmar-apagar');
+const chatArea         = document.getElementById('area-chat');
+const chatVazio        = document.getElementById('aviso-chat-vazio');
+const chatContent      = document.getElementById('conteudo-chat');
+const parceiroAvatar   = document.getElementById('contato-avatar');
+const parceiroNome     = document.getElementById('contato-nome');
+const parceiroStatus   = document.getElementById('contato-status');
+const mensagensDiv     = document.getElementById('lista-mensagens');
+const inputMensagem    = document.getElementById('campo-mensagem');
+const btnEnviar        = document.getElementById('botao-enviar');
+const btnSair          = document.getElementById('botao-sair');
+const btnVoltarHeader  = document.getElementById('botao-voltar');
+const btnApagar        = document.getElementById('botao-apagar-conversa');
+const modalApagar      = document.getElementById('modal-confirmar-exclusao');
+const modalOverlay     = document.getElementById('modal-fundo');
+const btnCancelarApagar  = document.getElementById('botao-cancelar-exclusao');
+const btnConfirmarApagar = document.getElementById('botao-confirmar-exclusao');
 
 // ===== Seletor de perfil =====
-const btnRoleCliente  = document.getElementById('btn-role-cliente');
-const btnRoleAdvogado = document.getElementById('btn-role-advogado');
-const btnRoleIA       = document.getElementById('btn-role-ia');
-const oabField        = document.getElementById('oab-field');
-const inputOAB        = document.getElementById('input-oab');
-const inputSenha      = document.getElementById('input-senha');
+const btnRoleCliente  = document.getElementById('botao-perfil-cliente');
+const btnRoleAdvogado = document.getElementById('botao-perfil-advogado');
+const btnRoleIA       = document.getElementById('botao-perfil-ia');
+const oabField        = document.getElementById('campo-oab');
+const inputOAB        = document.getElementById('campo-oab-numero');
+const inputSenha      = document.getElementById('campo-senha');
 const senhaHint       = document.getElementById('senha-hint');
 
 function selecionarRole(role) {
@@ -217,17 +217,17 @@ socket.on('entrar_ok', ({ nome, role, token }) => {
   preencherAvatar(meuAvatar, nome, 30);
   meuNomeEl.textContent = nome;
   // Aba Clientes/Advogados: oculta apenas para role 'ia'
-  const navBtnContatos = document.querySelector('.nav-btn[data-tab="clientes"]');
+  const navBtnContatos = document.querySelector('.botao-nav[data-tab="clientes"]');
   if (navBtnContatos) {
     navBtnContatos.style.display = role === 'ia' ? 'none' : '';
     navBtnContatos.querySelector('span').textContent = role === 'advogado' ? 'Clientes' : 'Advogados';
   }
-  const tituloContatos = document.getElementById('clientes-titulo');
+  const tituloContatos = document.getElementById('titulo-contatos');
   if (tituloContatos) tituloContatos.textContent = role === 'advogado' ? 'Clientes' : 'Advogados';
 
-  // Role IA: mostra painel de envio, esconde main-body
-  const mainBodyEl = document.getElementById('main-body');
-  const iaSenderEl = document.getElementById('ia-sender');
+  // Role IA: mostra painel de envio, esconde corpo-principal
+  const mainBodyEl = document.getElementById('corpo-principal');
+  const iaSenderEl = document.getElementById('painel-envio-resumo');
   if (role === 'ia') {
     mainBodyEl.style.display = 'none';
     iaSenderEl.style.display = 'flex';
@@ -246,16 +246,16 @@ socket.on('entrar_erro', ({ motivo }) => {
 
 // ===== Navegação por abas =====
 function trocarTab(tab) {
-  document.querySelectorAll('.nav-btn').forEach(btn => {
+  document.querySelectorAll('.botao-nav').forEach(btn => {
     btn.classList.toggle('ativo', btn.dataset.tab === tab);
   });
-  document.querySelectorAll('.tab-panel').forEach(panel => {
-    panel.hidden = panel.id !== 'tab-' + tab;
+  document.querySelectorAll('.painel-aba').forEach(panel => {
+    panel.hidden = panel.id !== 'aba-' + tab;
   });
   if (tab === 'clientes') renderizarClientes();
 }
 
-document.querySelectorAll('.nav-btn').forEach(btn => {
+document.querySelectorAll('.botao-nav').forEach(btn => {
   btn.addEventListener('click', () => trocarTab(btn.dataset.tab));
 });
 
@@ -279,19 +279,19 @@ btnSair.addEventListener('click', () => {
   erroLogin.hidden = true;
   chatContent.style.display = 'none';
   chatVazio.style.display = 'flex';
-  convListPanel.classList.remove('hide');
-  chatArea.classList.remove('show');
+  convListPanel.classList.remove('oculto');
+  chatArea.classList.remove('expandido');
   btnVoltarHeader.classList.remove('visivel');
   // Restaura nav e visibilidade para o próximo login
-  const navBtnContatos = document.querySelector('.nav-btn[data-tab="clientes"]');
+  const navBtnContatos = document.querySelector('.botao-nav[data-tab="clientes"]');
   if (navBtnContatos) {
     navBtnContatos.style.display = '';
     navBtnContatos.querySelector('span').textContent = 'Clientes';
   }
-  document.getElementById('main-body').style.display = '';
-  document.getElementById('ia-sender').style.display = 'none';
-  document.getElementById('ia-input-titulo').value = '';
-  document.getElementById('ia-input-conteudo').value = '';
+  document.getElementById('corpo-principal').style.display = '';
+  document.getElementById('painel-envio-resumo').style.display = 'none';
+  document.getElementById('campo-titulo-resumo').value = '';
+  document.getElementById('campo-conteudo-resumo').value = '';
   trocarTab('chat');
 
   setTimeout(() => socket.connect(), 150);
@@ -308,7 +308,7 @@ function renderizarConversas() {
 
   if (conversasAtivas.length === 0) {
     const empty = document.createElement('div');
-    empty.id = 'sem-conversas';
+    empty.id = 'aviso-sem-conversas';
     empty.innerHTML = 'Nenhuma conversa ainda.<br>Vá em <strong>Clientes</strong> para iniciar.';
     listaConversas.appendChild(empty);
     return;
@@ -316,7 +316,7 @@ function renderizarConversas() {
 
   conversasAtivas.forEach(conv => {
     const item = document.createElement('div');
-    item.className = 'conv-item' + (conv.com === activeChat ? ' ativo' : '');
+    item.className = 'item-conversa' + (conv.com === activeChat ? ' ativo' : '');
     item.dataset.nome = conv.com;
 
     const av = document.createElement('div');
@@ -325,33 +325,33 @@ function renderizarConversas() {
     const user = allUsers.find(u => u.name === conv.com);
     const isOnline = user?.online || false;
     const dot = document.createElement('div');
-    dot.className = 'status-dot' + (isOnline ? ' online' : '');
+    dot.className = 'bolinha-status' + (isOnline ? ' online' : '');
     av.appendChild(dot);
 
     const info = document.createElement('div');
-    info.className = 'conv-info';
+    info.className = 'info-conversa';
     const nomeEl = document.createElement('div');
-    nomeEl.className = 'conv-nome';
+    nomeEl.className = 'nome-conversa';
     nomeEl.textContent = conv.com;
     const preview = document.createElement('div');
-    preview.className = 'conv-preview';
+    preview.className = 'preview-conversa';
     preview.textContent = conv.ultimaMensagem || '';
     info.appendChild(nomeEl);
     info.appendChild(preview);
 
     const right = document.createElement('div');
-    right.className = 'conv-right';
+    right.className = 'lado-direito-conversa';
     const hora = document.createElement('span');
-    hora.className = 'conv-hora';
+    hora.className = 'hora-conversa';
     hora.textContent = conv.hora || '';
     const badge = document.createElement('div');
-    badge.className = 'badge-unread' + ((unread[conv.com] || 0) > 0 ? ' visivel' : '');
+    badge.className = 'contador-nao-lido' + ((unread[conv.com] || 0) > 0 ? ' visivel' : '');
     badge.textContent = (unread[conv.com] || 0) > 99 ? '99+' : (unread[conv.com] || '');
     right.appendChild(hora);
     right.appendChild(badge);
 
     const btnLixeira = document.createElement('button');
-    btnLixeira.className = 'btn-apagar-item';
+    btnLixeira.className = 'botao-apagar-na-lista';
     btnLixeira.title = 'Apagar conversa';
     btnLixeira.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>`;
     btnLixeira.addEventListener('click', e => {
@@ -377,7 +377,7 @@ socket.on('usuarios', (lista) => {
 });
 
 function renderizarClientes() {
-  const listaEl = document.getElementById('lista-clientes');
+  const listaEl = document.getElementById('lista-contatos');
   listaEl.innerHTML = '';
 
   const roleAlvo = meuRole === 'advogado' ? 'cliente' : 'advogado';
@@ -385,7 +385,7 @@ function renderizarClientes() {
 
   if (outros.length === 0) {
     const aviso = document.createElement('div');
-    aviso.className = 'sem-itens';
+    aviso.className = 'aviso-lista-vazia';
     aviso.textContent = 'Nenhuma pessoa cadastrada ainda.';
     listaEl.appendChild(aviso);
     return;
@@ -398,28 +398,28 @@ function renderizarClientes() {
 
   outros.forEach(u => {
     const item = document.createElement('div');
-    item.className = 'cliente-item';
+    item.className = 'item-contato';
 
     const av = document.createElement('div');
     av.className = 'avatar';
     preencherAvatar(av, u.name, 44);
     const dot = document.createElement('div');
-    dot.className = 'status-dot' + (u.online ? ' online' : '');
+    dot.className = 'bolinha-status' + (u.online ? ' online' : '');
     av.appendChild(dot);
 
     const info = document.createElement('div');
-    info.className = 'cliente-info';
+    info.className = 'info-contato';
     const nomeEl = document.createElement('div');
-    nomeEl.className = 'cliente-nome';
+    nomeEl.className = 'nome-contato';
     nomeEl.textContent = u.name;
     const statusEl = document.createElement('div');
-    statusEl.className = 'cliente-status' + (u.online ? ' online' : '');
+    statusEl.className = 'status-contato' + (u.online ? ' online' : '');
     statusEl.textContent = u.online ? 'Online' : 'Offline';
     info.appendChild(nomeEl);
     info.appendChild(statusEl);
 
     const btnChat = document.createElement('button');
-    btnChat.className = 'cliente-chat-btn';
+    btnChat.className = 'botao-conversar';
     btnChat.textContent = 'Conversar';
     btnChat.addEventListener('click', e => {
       e.stopPropagation();
@@ -443,8 +443,8 @@ function abrirConversa(nome) {
   activeChat = nome;
   unread[nome] = 0;
 
-  convListPanel.classList.add('hide');
-  chatArea.classList.add('show');
+  convListPanel.classList.add('oculto');
+  chatArea.classList.add('expandido');
   chatVazio.style.display = 'none';
   chatContent.style.display = 'flex';
   btnVoltarHeader.classList.add('visivel');
@@ -475,8 +475,8 @@ function atualizarChatHeader() {
 // ===== Voltar (header) =====
 btnVoltarHeader.addEventListener('click', () => {
   activeChat = null;
-  convListPanel.classList.remove('hide');
-  chatArea.classList.remove('show');
+  convListPanel.classList.remove('oculto');
+  chatArea.classList.remove('expandido');
   chatContent.style.display = 'none';
   chatVazio.style.display = 'flex';
   btnVoltarHeader.classList.remove('visivel');
@@ -496,14 +496,14 @@ socket.on('historico', ({ com, msgs }) => {
 function adicionarMensagem(msg) {
   const isMinha = msg.de === meuNome;
   const wrapper = document.createElement('div');
-  wrapper.className = 'msg-wrapper ' + (isMinha ? 'minha' : 'outra');
+  wrapper.className = 'linha-mensagem ' + (isMinha ? 'mensagem-minha' : 'mensagem-recebida');
 
   const bubble = document.createElement('div');
-  bubble.className = 'msg-bubble';
+  bubble.className = 'balao-mensagem';
   bubble.textContent = msg.texto;
 
   const hora = document.createElement('span');
-  hora.className = 'msg-hora';
+  hora.className = 'hora-mensagem';
   hora.textContent = msg.hora;
 
   wrapper.appendChild(bubble);
@@ -587,10 +587,10 @@ function escapeHtml(str) {
 }
 
 // ===== IA Sender =====
-const iaInputTitulo   = document.getElementById('ia-input-titulo');
-const iaInputConteudo = document.getElementById('ia-input-conteudo');
-const btnEnviarResumo = document.getElementById('btn-enviar-resumo');
-const iaFeedback      = document.getElementById('ia-feedback');
+const iaInputTitulo   = document.getElementById('campo-titulo-resumo');
+const iaInputConteudo = document.getElementById('campo-conteudo-resumo');
+const btnEnviarResumo = document.getElementById('botao-enviar-resumo');
+const iaFeedback      = document.getElementById('feedback-envio');
 
 function enviarResumo() {
   const titulo   = iaInputTitulo.value.trim();
@@ -631,36 +631,36 @@ function chaveData(ts) {
 
 function criarCardResumo(resumo) {
   const card = document.createElement('div');
-  card.className = 'ia-card';
+  card.className = 'cartao-resumo';
   card.innerHTML = `
-    <div class="ia-card-header">
-      <span class="ia-card-titulo">${escapeHtml(resumo.titulo)}</span>
-      <span class="ia-card-hora">${escapeHtml(resumo.hora)}</span>
+    <div class="topo-cartao-resumo">
+      <span class="titulo-cartao-resumo">${escapeHtml(resumo.titulo)}</span>
+      <span class="hora-cartao-resumo">${escapeHtml(resumo.hora)}</span>
     </div>
-    <div class="ia-card-corpo">${escapeHtml(resumo.conteudo)}</div>
-    <div class="ia-card-footer">Enviado por: ${escapeHtml(resumo.de)}</div>
+    <div class="corpo-cartao-resumo">${escapeHtml(resumo.conteudo)}</div>
+    <div class="rodape-cartao-resumo">Enviado por: ${escapeHtml(resumo.de)}</div>
   `;
   return card;
 }
 
 function criarSecaoDia(rotulo, chave) {
   const secao = document.createElement('div');
-  secao.className = 'resumo-dia';
+  secao.className = 'grupo-por-dia';
   secao.dataset.chave = chave;
 
   const header = document.createElement('div');
-  header.className = 'resumo-dia-header';
+  header.className = 'grupo-dia-cabecalho';
   header.innerHTML = `
-    <span class="resumo-dia-rotulo">${escapeHtml(rotulo)}</span>
-    <span class="resumo-dia-toggle">▾</span>
+    <span class="grupo-dia-data">${escapeHtml(rotulo)}</span>
+    <span class="grupo-dia-seta">▾</span>
   `;
   header.addEventListener('click', () => {
     const min = secao.classList.toggle('minimizado');
-    header.querySelector('.resumo-dia-toggle').textContent = min ? '▸' : '▾';
+    header.querySelector('.grupo-dia-seta').textContent = min ? '▸' : '▾';
   });
 
   const lista = document.createElement('div');
-  lista.className = 'resumo-dia-lista';
+  lista.className = 'grupo-dia-lista';
 
   secao.appendChild(header);
   secao.appendChild(lista);
@@ -668,8 +668,8 @@ function criarSecaoDia(rotulo, chave) {
 }
 
 function renderResumos(lista) {
-  const iaLista = document.getElementById('ia-lista');
-  const iaEmpty = document.getElementById('ia-empty');
+  const iaLista = document.getElementById('lista-resumos');
+  const iaEmpty = document.getElementById('estado-vazio');
   iaLista.innerHTML = '';
 
   if (!lista || lista.length === 0) {
@@ -695,7 +695,7 @@ function renderResumos(lista) {
     .forEach(chave => {
       const g = grupos[chave];
       const secao = criarSecaoDia(g.rotulo, chave);
-      const listaDia = secao.querySelector('.resumo-dia-lista');
+      const listaDia = secao.querySelector('.grupo-dia-lista');
       g.itens
         .sort((a, b) => b.ts - a.ts)
         .forEach(r => listaDia.appendChild(criarCardResumo(r)));
@@ -706,22 +706,22 @@ function renderResumos(lista) {
 socket.on('lista_resumos', renderResumos);
 
 socket.on('novo_resumo', (resumo) => {
-  const iaEmpty = document.getElementById('ia-empty');
-  const iaLista = document.getElementById('ia-lista');
+  const iaEmpty = document.getElementById('estado-vazio');
+  const iaLista = document.getElementById('lista-resumos');
   if (iaEmpty) iaEmpty.style.display = 'none';
 
   const chave = chaveData(resumo.ts);
-  let secao = iaLista.querySelector(`.resumo-dia[data-chave="${CSS.escape(chave)}"]`);
+  let secao = iaLista.querySelector(`.grupo-por-dia[data-chave="${CSS.escape(chave)}"]`);
   if (!secao) {
     secao = criarSecaoDia(rotuloDia(resumo.ts), chave);
     iaLista.insertBefore(secao, iaLista.firstChild);
   }
-  const listaDia = secao.querySelector('.resumo-dia-lista');
+  const listaDia = secao.querySelector('.grupo-dia-lista');
   listaDia.insertBefore(criarCardResumo(resumo), listaDia.firstChild);
   // Re-expande a seção caso esteja minimizada
   if (secao.classList.contains('minimizado')) {
     secao.classList.remove('minimizado');
-    secao.querySelector('.resumo-dia-toggle').textContent = '▾';
+    secao.querySelector('.grupo-dia-seta').textContent = '▾';
   }
 });
 

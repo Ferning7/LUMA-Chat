@@ -114,13 +114,47 @@
         "texto": "po",
         "hora": "12:43",
         "ts": 1772206981136
+      },
+      {
+        "de": "Cliente 3",
+        "para": "Matheus",
+        "texto": "Oii",
+        "hora": "13:32",
+        "ts": 1772209948441
+      }
+    ],
+    "Cliente 3::Victor Machado Costa": [
+      {
+        "de": "Victor Machado Costa",
+        "para": "Cliente 3",
+        "texto": "oi",
+        "hora": "13:08",
+        "ts": 1772208489934
+      },
+      {
+        "de": "Cliente 3",
+        "para": "Victor Machado Costa",
+        "texto": "OI",
+        "hora": "13:08",
+        "ts": 1772208497783
+      }
+    ],
+    "Advogado 2::Cliente 3": [
+      {
+        "de": "Advogado 2",
+        "para": "Cliente 3",
+        "texto": "Teste",
+        "hora": "13:32",
+        "ts": 1772209923595
       }
     ]
   },
   "allUsers": [
     {
       "name": "Matheus",
-      "role": "advogado"
+      "role": "advogado",
+      "passwordHash": "40ff5bb448a0af8c037e682441f5602824215bdf7ac6fa00a90d569ff44cacc3",
+      "passwordSalt": "ccc6516c7e75fd358c69a43b97d30543"
     },
     {
       "name": "Cliente",
@@ -132,7 +166,9 @@
     },
     {
       "name": "Cliente 3",
-      "role": "cliente"
+      "role": "cliente",
+      "passwordHash": "99ef300224121bb593d415f0f936e8ee3ebaa9b44300657723375c2377d3404a",
+      "passwordSalt": "0b1a8fa8881e3cae95a809bce84470ea"
     },
     {
       "name": "Advogado 2",
@@ -140,7 +176,24 @@
     },
     {
       "name": "LUMA",
+      "role": "ia"
+    },
+    {
+      "name": "LUMA IA",
+      "role": "ia"
+    },
+    {
+      "name": "LUMA AI",
+      "role": "ia"
+    },
+    {
+      "name": "Victor Machado Costa",
+      "role": "advogado"
+    },
+    {
+      "name": "victor",
       "role": "advogado"
     }
-  ]
+  ],
+  "resumos": []
 }
